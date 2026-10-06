@@ -937,3 +937,41 @@ Zip the repository, including `.git`, and present it. Clive creates the public r
 - [ ] **Step 10: Post-launch checks**
 
 PageSpeed Insights on the live URL scores 95 or higher on mobile for performance, accessibility, best practices, and SEO. LinkedIn's Post Inspector shows the preview image. Every external link opens. Tick the spec's quality checklist.
+
+---
+
+## Amendment: Revision 2 (bolder design)
+
+Implements the spec's "Revision 2" section. Same Global Constraints, except the token list grows to eight (`routeOnDark` #7C9BFF, `mutedOnDark` #A7B3C3) and the type sizes follow Revision 2. New dependencies: `world-atlas@2.0.2`, `topojson-client@3.1.0`, `d3-geo@3.1.1`, dev `@types/d3-geo@3.1.1`, `@types/topojson-client@3.1.5`. Task 10 Steps 6–10 run again after Task 14.
+
+### Task 11: Map geometry and stop coordinates
+
+**Files:** Create `src/lib/geo.ts`; Modify `src/data/types.ts`, `src/data/stops.ts`; Test `tests/geo.test.ts`
+**Interfaces:**
+```ts
+export const MAP: { lon0: 60; lon1: 310; lat0: 68; lat1: -18; cols: 100; rows: 34; width: 1000; height: 357 };
+export function project(lon: number, lat: number): { x: number; y: number }; // fractions of the Pacific-centred crop
+export function landDots(): { x: number; y: number }[];                       // land cell centres, as fractions
+export function dotsPath(dots: { x: number; y: number }[]): string;           // "M{x} {y}h0" per dot, viewBox units, 1 dp
+export function routePath(points: { x: number; y: number }[]): string;        // M + one Q per hop; control above the higher end by 35% of the hop
+export function formatCoords(lat: number, lon: number): string;               // "6.2° S, 106.8° E"
+// Stop gains lat: number; lon: number
+```
+Tests: Jakarta projects to (0.1872, 0.8628) and Tempe to (0.7524, 0.4023); `landDots()` has 1,191 dots; the route through the four stops starts `M187.2 308` and has three `Q` hops; coordinates format as "6.2° S, 106.8° E" and "40.7° N, 74.0° W".
+
+### Task 12: World-route hero
+
+**Files:** Create `src/components/WorldRoute.astro`; Modify `src/components/Hero.astro`, `src/styles/global.css`, `tests/hero.test.ts`; Delete `src/components/TopRoute.astro`
+**Interfaces:** `WorldRoute` (no props) → `div.world-route` holding an `aria-hidden` `svg viewBox="0 0 1000 357"` with `path.land`, `path.route` (`pathLength="1"`, CSS draw on load), `path.next` (dashed), and four `circle.marker`; an `ol.top-route` of `li[style="--x;--y"]` > `a[href="#stop-{id}"]` > `.city` + `.years`; and `ul.wins` of `li` > `.city` + `.win`. The hero `h1` is `.visually-hidden`.
+Tests: stops link in journey order; the wins strip lists the four wins in order; the map has land, one route, and four markers; nothing waits for a script; the name is visually hidden.
+
+### Task 13: Bolder experience route with coordinates
+
+**Files:** Modify `src/components/RouteSpine.astro`, `tests/route-spine.test.ts`
+Tests: each stop shows its coordinates ("6.2° S, 106.8° E" for Jakarta, "40.7° N, 74.0° W" for New York).
+
+### Task 14: Projects on a dark band
+
+**Files:** Modify `src/styles/tokens.ts`, `src/data/types.ts` (`Project.figure: { value: string; label: string }`), `src/data/projects.ts`, `src/components/ProjectRow.astro`, `src/components/Projects.astro`, `src/pages/index.astro`, and the tests for contrast, base layout, projects, and page order.
+Figures: SlackDB "Winner" / "AutoDB track, VillageHacks"; Drift "48 hours" / "build time at StarkHacks"; MRI denoising "+11 dB" / "PSNR across about 3,000 MRI slices".
+Tests: the two dark tokens reach 4.5:1 on ink; `tokenStyle` carries eight tokens; each row shows its figure; the projects section is marked `data-tone="dark"` and spans the full width; sections still run in spec order.

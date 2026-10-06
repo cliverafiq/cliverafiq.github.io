@@ -5,6 +5,8 @@ export const stops: Stop[] = [
   {
     id: 'jakarta',
     city: 'Jakarta',
+    lat: -6.2,
+    lon: 106.8,
     years: '2023–2026',
     win: 'Go services behind a 6,000-officer loan workflow',
     entries: [
@@ -16,6 +18,8 @@ export const stops: Stop[] = [
   {
     id: 'tempe',
     city: 'Tempe',
+    lat: 33.4,
+    lon: -111.9,
     years: '2025–now',
     win: 'AutoDB track win at VillageHacks',
     entries: [
@@ -27,6 +31,8 @@ export const stops: Stop[] = [
   {
     id: 'west-lafayette',
     city: 'West Lafayette',
+    lat: 40.4,
+    lon: -86.9,
     years: '2026',
     win: 'Drift, built in 48 hours',
     entries: [
@@ -36,6 +42,8 @@ export const stops: Stop[] = [
   {
     id: 'new-york',
     city: 'New York',
+    lat: 40.7,
+    lon: -74.0,
     years: '2026',
     win: 'Real-time notifications on AWS',
     entries: [

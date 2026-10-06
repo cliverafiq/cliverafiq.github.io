@@ -10,6 +10,8 @@ export interface Entry {
 export interface Stop {
   id: StopId;
   city: string;
+  lat: number;
+  lon: number;
   years: string;
   win: string;
   entries: Entry[];

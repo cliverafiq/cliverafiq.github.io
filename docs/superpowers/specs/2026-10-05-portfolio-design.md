@@ -155,3 +155,14 @@ These defaults apply unless Clive changes them.
 Out of scope for version 1: a dark version, a blog or case-study pages, a contact form (email links instead), analytics, and a content management system.
 
 Sources: Clive's resume (uploaded October 5, 2026), [github.com/cliverafiq](https://github.com/cliverafiq), and [aayushp123.github.io](https://aayushp123.github.io/).
+
+## Revision 2: bolder visual design
+
+Clive found version 1 too plain and chose the world-map hero on October 6, 2026. Where this section conflicts with the ones above, it wins.
+
+- **Hero:** the route runs across a dotted world map, centered on the Pacific so it reads left to right: Jakarta, across the ocean to Tempe, West Lafayette, and New York, then a dashed segment to "Next: 2027." The dots are generated at build time from Natural Earth land data, and the arc draws itself on load using CSS only. City labels are HTML over the map so they stay readable on phones. The four main wins sit in a strip under the map.
+- **Type:** headline 72 px (40 on phones), section headings 48 px, city names in the experience route 40 px.
+- **Experience route:** an 8 px line and 28 px interchange-style stops. Each city shows its coordinates, for example "6.2° S, 106.8° E."
+- **Projects:** a full-width dark band (ink background) to change the page's pace. Each row leads with one large result figure, since the repos have no images yet; screenshots from Clive can replace them.
+- **Tokens:** two additions for the dark band, route on dark #7C9BFF and muted on dark #A7B3C3, both above 4.5:1 on ink.
+- **Name:** shown once, in the top bar. The hero keeps it for screen readers.

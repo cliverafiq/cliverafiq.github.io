@@ -52,6 +52,10 @@ import { stops } from '../data/stops';
     height: 100%;
     background: var(--route);
   }
+  /* With the progress script running, the fill follows the reader. */
+  .spine[data-progress]::after {
+    height: var(--fill, 0px);
+  }
   .stop {
     position: relative;
     margin-bottom: 56px;
@@ -70,6 +74,13 @@ import { stops } from '../data/stops';
     height: 17px;
     border-radius: 50%;
     border: 3px solid var(--route);
+    background: var(--route);
+  }
+  .spine[data-progress] .dot {
+    background: var(--page);
+    transition: background-color 200ms ease-out;
+  }
+  .spine[data-progress] .dot[data-visited] {
     background: var(--route);
   }
   .city {

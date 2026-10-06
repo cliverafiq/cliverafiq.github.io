@@ -1,0 +1,107 @@
+---
+import { stops } from '../data/stops';
+---
+<section id="experience" class="experience" aria-labelledby="experience-title">
+  <h2 id="experience-title">Experience</h2>
+  <ol class="spine" data-spine>
+    {stops.map(stop => (
+      <li class="stop" id={`stop-${stop.id}`} data-stop>
+        <span class="dot" data-stop-dot aria-hidden="true"></span>
+        <h3><span class="city">{stop.city}</span> <span class="years">{stop.years}</span></h3>
+        <ul class="entries">
+          {stop.entries.map(entry => (
+            <li>
+              <p class="org">{entry.org}</p>
+              <p class="role">{entry.role}</p>
+              <p class="line">{entry.line}</p>
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .experience {
+    padding-block: 64px;
+  }
+  h2 {
+    margin-bottom: 40px;
+  }
+  .spine {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 44px;
+    list-style: none;
+  }
+  /* Track and fill share the left edge; without a script the fill covers the whole track. */
+  .spine::before,
+  .spine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 7px;
+    width: 3px;
+  }
+  .spine::before {
+    bottom: 0;
+    background: var(--track);
+  }
+  .spine::after {
+    height: 100%;
+    background: var(--route);
+  }
+  .stop {
+    position: relative;
+    margin-bottom: 56px;
+    scroll-margin-top: 88px;
+  }
+  .stop:last-child {
+    margin-bottom: 0;
+    padding-bottom: 8px;
+  }
+  .dot {
+    position: absolute;
+    z-index: 1;
+    top: 6px;
+    left: -44px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 3px solid var(--route);
+    background: var(--route);
+  }
+  .city {
+    font-size: var(--t-name);
+    font-weight: 500;
+  }
+  .years {
+    margin-left: 8px;
+    font-size: var(--t-label);
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .entries {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .entries li {
+    padding-block: 14px;
+    border-top: 1px solid var(--hairline);
+  }
+  .org {
+    font-weight: 500;
+  }
+  .role {
+    margin-top: 2px;
+    font-size: var(--t-label);
+    color: var(--muted);
+  }
+  .line {
+    margin-top: 4px;
+    font-size: var(--t-small);
+    color: var(--muted);
+  }
+</style>

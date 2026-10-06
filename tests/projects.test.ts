@@ -24,3 +24,9 @@ test('a row carries what it is, my part, the stack, the result, and links', asyn
     ['Code', 'https://github.com/cliverafiq/SlackDB'], ['Demo', 'https://slackdb.vercel.app/'],
   ]);
 });
+test('each row leads with one large result figure', async () => {
+  const doc = await renderDoc(Projects);
+  expect([...doc.querySelectorAll('article.project .figure')].map(f => [f.querySelector('.value')?.textContent, f.querySelector('.label')?.textContent])).toEqual([
+    ['Winner', 'AutoDB track, VillageHacks'], ['48 hours', 'build time at StarkHacks'], ['+11 dB', 'PSNR across about 3,000 MRI slices'],
+  ]);
+});

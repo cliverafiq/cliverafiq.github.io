@@ -2,16 +2,23 @@
 import ProjectRow from './ProjectRow.astro';
 import { projects } from '../data/projects';
 ---
-<section id="projects" class="projects" aria-labelledby="projects-title">
-  <h2 id="projects-title">Projects</h2>
-  {projects.map(project => <ProjectRow project={project} />)}
+<section id="projects" class="projects" data-tone="dark" aria-labelledby="projects-title">
+  <div class="wrap">
+    <h2 id="projects-title">Projects</h2>
+    {projects.map(project => <ProjectRow project={project} />)}
+  </div>
 </section>
 
 <style>
   .projects {
-    padding-block: 64px;
+    padding-block: 96px;
+    background: var(--ink);
+    color: var(--page);
+  }
+  .projects :global(:focus-visible) {
+    outline-color: var(--routeOnDark);
   }
   h2 {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 </style>

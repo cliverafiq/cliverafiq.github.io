@@ -13,3 +13,6 @@ test('text tokens meet WCAG AA on the page, and white meets it on the route', ()
 test('the filled route stands out from the track', () => {
   expect(contrastRatio(tokens.route, tokens.track)).toBeGreaterThanOrEqual(3);
 });
+test('the dark band keeps text readable on ink', () => {
+  for (const fg of [tokens.page, tokens.routeOnDark, tokens.mutedOnDark]) expect(contrastRatio(fg, tokens.ink)).toBeGreaterThanOrEqual(4.5);
+});

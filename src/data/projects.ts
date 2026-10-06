@@ -11,6 +11,7 @@ export const projects: Project[] = [
     part: 'SQL guardrails (risk-scored migrations, sandbox validation, approver enforcement) and the FastAPI backend',
     stack: ['FastAPI', 'Slack Bolt', 'PostgreSQL', 'Docker'],
     result: 'AutoDB track winner at VillageHacks',
+    figure: { value: 'Winner', label: 'AutoDB track, VillageHacks' },
     links: [
       { label: 'Code', href: 'https://github.com/cliverafiq/SlackDB' },
       { label: 'Demo', href: 'https://slackdb.vercel.app/' },
@@ -25,6 +26,7 @@ export const projects: Project[] = [
     part: 'Bidirectional WebSerial protocol and ESP32 firmware in C++, learned during the hackathon',
     stack: ['React', 'MediaPipe', 'WebSerial', 'ESP32', 'C++'],
     result: 'Built in 48 hours at StarkHacks',
+    figure: { value: '48 hours', label: 'build time at StarkHacks' },
     links: [{ label: 'Code', href: 'https://github.com/cliverafiq/Drift' }],
   },
   {
@@ -36,6 +38,7 @@ export const projects: Project[] = [
     part: 'Adapted FFDNet for Rician noise; built the training and evaluation pipeline',
     stack: ['Python', 'PyTorch', 'FFDNet'],
     result: 'PSNR up about 11 dB; mean squared error from about 851 to 81',
+    figure: { value: '+11 dB', label: 'PSNR across about 3,000 MRI slices' },
     links: [{ label: 'Code', href: 'https://github.com/cliverafiq/mri-tumor-segmentation' }],
   },
 ];

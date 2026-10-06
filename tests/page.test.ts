@@ -4,7 +4,7 @@ import { renderDoc } from './helpers/render';
 
 test('sections run in the spec order', async () => {
   const doc = await renderDoc(Index);
-  expect([...doc.querySelectorAll('main > header, main > section')].map(el => el.id)).toEqual(['top', 'about', 'experience', 'projects', 'skills', 'contact']);
+  expect([...doc.querySelectorAll('main header, main section')].map(el => el.id)).toEqual(['top', 'about', 'experience', 'projects', 'skills', 'contact']);
 });
 test('about states the program and the early graduation', async () => {
   const doc = await renderDoc(Index);
@@ -24,4 +24,8 @@ test('every in-page link points at an element on the page', async () => {
   for (const a of doc.querySelectorAll('a[href^="#"]')) {
     expect(doc.getElementById(a.getAttribute('href')!.slice(1)), a.getAttribute('href')!).not.toBeNull();
   }
+});
+test('projects sit on a full-width dark band', async () => {
+  const doc = await renderDoc(Index);
+  expect(doc.querySelector('main > section#projects[data-tone="dark"]')).not.toBeNull();
 });

@@ -31,6 +31,7 @@ export interface Project {
   part: string;
   stack: string[];
   result: string;
+  figure: { value: string; label: string };
   links: ProjectLink[];
 }
 

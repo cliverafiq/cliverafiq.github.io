@@ -18,5 +18,5 @@ test('head sets viewport, icon, canonical URL, and description', async () => {
 });
 test('tokens are set once on the root element', async () => {
   const doc = await renderDoc(Base, props, { default: '' });
-  expect(doc.documentElement.getAttribute('style')).toBe('--page:#F6F7F9;--ink:#0F1B2A;--muted:#5B6B7E;--hairline:#DDE2E8;--track:#C9D1DB;--route:#1F4FD8');
+  expect(doc.documentElement.getAttribute('style')).toBe('--page:#F6F7F9;--ink:#0F1B2A;--muted:#5B6B7E;--hairline:#DDE2E8;--track:#C9D1DB;--route:#1F4FD8;--routeOnDark:#7C9BFF;--mutedOnDark:#A7B3C3');
 });

@@ -13,12 +13,16 @@ import TopBar from '../components/TopBar.astro';
   description="Backend engineer and Computer Systems Engineering student at ASU, shipping production systems from Jakarta to New York."
 >
   <TopBar />
-  <main class="wrap">
-    <Hero />
-    <About />
-    <RouteSpine />
+  <main>
+    <div class="wrap">
+      <Hero />
+      <About />
+      <RouteSpine />
+    </div>
     <Projects />
-    <SkillsFilter />
-    <NextStop />
+    <div class="wrap">
+      <SkillsFilter />
+      <NextStop />
+    </div>
   </main>
 </Base>

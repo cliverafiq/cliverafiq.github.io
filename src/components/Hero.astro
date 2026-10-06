@@ -1,0 +1,37 @@
+---
+import TopRoute from './TopRoute.astro';
+import { profile } from '../data/profile';
+import { stops } from '../data/stops';
+---
+<header id="top" class="hero" data-hero>
+  <h1 class="name">{profile.name}</h1>
+  <p class="headline">{profile.headline}</p>
+  <TopRoute stops={stops} />
+  <p class="hero-links">
+    <a href={profile.resumePath}>Resume</a>
+    <a href={profile.github}>GitHub</a>
+  </p>
+</header>
+
+<style>
+  .hero {
+    padding-block: 56px 64px;
+  }
+  .name {
+    font-size: var(--t-body);
+    font-weight: 500;
+  }
+  .headline {
+    max-width: 25ch;
+    margin-block: 40px 56px;
+    font-size: var(--t-headline);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  .hero-links {
+    display: flex;
+    gap: 24px;
+    margin-top: 48px;
+    font-size: var(--t-small);
+  }
+</style>

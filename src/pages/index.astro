@@ -1,4 +1,24 @@
 ---
-import { profile } from '../data/profile';
+import Base from '../layouts/Base.astro';
+import About from '../components/About.astro';
+import Hero from '../components/Hero.astro';
+import NextStop from '../components/NextStop.astro';
+import Projects from '../components/Projects.astro';
+import RouteSpine from '../components/RouteSpine.astro';
+import SkillsFilter from '../components/SkillsFilter.astro';
+import TopBar from '../components/TopBar.astro';
 ---
-<h1>{profile.name}</h1>
+<Base
+  title="Clive Rafiq, backend engineer"
+  description="Backend engineer and Computer Systems Engineering student at ASU, shipping production systems from Jakarta to New York."
+>
+  <TopBar />
+  <main class="wrap">
+    <Hero />
+    <About />
+    <RouteSpine />
+    <Projects />
+    <SkillsFilter />
+    <NextStop />
+  </main>
+</Base>

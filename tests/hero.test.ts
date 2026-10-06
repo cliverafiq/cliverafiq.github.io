@@ -38,3 +38,10 @@ test('the hero keeps the name for screen readers and states the headline', async
   expect(links).toContainEqual(['Resume', '/Rafiq_Clive_Resume.pdf']);
   expect(links).toContainEqual(['GitHub', 'https://github.com/cliverafiq']);
 });
+test('resume and GitHub are buttons, with the resume filled', async () => {
+  const doc = await renderDoc(Hero);
+  const resume = doc.querySelector('header a[href="/Rafiq_Clive_Resume.pdf"]')!;
+  const github = doc.querySelector('header a[href="https://github.com/cliverafiq"]')!;
+  expect([...resume.classList]).toEqual(['button', 'primary']);
+  expect([...github.classList]).toEqual(['button']);
+});

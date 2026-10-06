@@ -7,8 +7,8 @@ import { profile } from '../data/profile';
   <p class="headline">{profile.headline}</p>
   <WorldRoute />
   <p class="hero-links">
-    <a href={profile.resumePath}>Resume</a>
-    <a href={profile.github}>GitHub</a>
+    <a class:list={['button', 'primary']} href={profile.resumePath}>Resume</a>
+    <a class="button" href={profile.github}>GitHub</a>
   </p>
 </header>
 
@@ -26,8 +26,8 @@ import { profile } from '../data/profile';
   }
   .hero-links {
     display: flex;
-    gap: 24px;
-    margin-top: 32px;
-    font-size: var(--t-small);
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
   }
 </style>

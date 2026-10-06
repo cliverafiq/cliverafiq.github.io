@@ -9,7 +9,9 @@ const end = points[points.length - 1];
 const pct = (n: number) => `${(n * 100).toFixed(2)}%`;
 
 // Where each label sits relative to its stop, so neighbouring cities never collide.
-const placement: Record<string, string> = { jakarta: 'right', tempe: 'below', 'west-lafayette': 'below-left', 'new-york': 'above' };
+const placement: Record<string, string> = { jakarta: 'right', tempe: 'below', 'west-lafayette': 'below', 'new-york': 'above-left' };
+// On phones West Lafayette sits too close to Tempe for both labels; the wins strip below still names it.
+const phoneHidden = new Set(['west-lafayette']);
 // When the line reaches each stop during the 2.6 s draw (the Pacific hop takes most of it).
 const arrival = (i: number) => [0.2, 2.0, 2.45, 2.7][i] ?? 2.7 + (i - 3) * 0.25;
 ---
@@ -25,7 +27,7 @@ const arrival = (i: number) => [0.2, 2.0, 2.45, 2.7][i] ?? 2.7 + (i - 3) * 0.25;
     </svg>
     <ol class="top-route">
       {stops.map((stop, i) => (
-        <li class={placement[stop.id] ?? 'below'} style={`--x:${pct(points[i].x)};--y:${pct(points[i].y)};--d:${arrival(i)}s`}>
+        <li class:list={[placement[stop.id] ?? 'below', { 'phone-hide': phoneHidden.has(stop.id) }]} style={`--x:${pct(points[i].x)};--y:${pct(points[i].y)};--d:${arrival(i)}s`}>
           <a href={`#stop-${stop.id}`}><span class="city">{stop.city}</span> <span class="years">{stop.years}</span></a>
         </li>
       ))}
@@ -92,8 +94,7 @@ const arrival = (i: number) => [0.2, 2.0, 2.45, 2.7][i] ?? 2.7 + (i - 3) * 0.25;
   }
   .top-route .right { transform: translate(16px, -50%); }
   .top-route .below { transform: translate(-50%, 16px); }
-  .top-route .below-left { transform: translate(calc(-100% + 10px), 16px); }
-  .top-route .above { transform: translate(-10px, calc(-100% - 16px)); }
+  .top-route .above-left { transform: translate(calc(-100% + 10px), calc(-100% - 16px)); }
   .top-route a {
     display: inline-flex;
     align-items: baseline;
@@ -121,7 +122,7 @@ const arrival = (i: number) => [0.2, 2.0, 2.45, 2.7][i] ?? 2.7 + (i - 3) * 0.25;
   .next-label {
     position: absolute;
     right: 0;
-    top: calc(var(--y) + 18px);
+    top: calc(var(--y) - 34px);
     font-size: var(--t-label);
     color: var(--route);
     animation: fade-in 0.4s ease-out 2.9s both;
@@ -153,8 +154,8 @@ const arrival = (i: number) => [0.2, 2.0, 2.45, 2.7][i] ?? 2.7 + (i - 3) * 0.25;
     .top-route a { padding: 2px 5px; }
     .top-route .right { transform: translate(10px, -50%); }
     .top-route .below { transform: translate(-50%, 10px); }
-    .top-route .below-left { transform: translate(calc(-100% + 6px), 10px); }
-    .top-route .above { transform: translate(-6px, calc(-100% - 10px)); }
+    .top-route .above-left { transform: translate(calc(-100% + 6px), calc(-100% - 10px)); }
+    .top-route .phone-hide { display: none; }
     .next-label { display: none; }
     .wins { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   }

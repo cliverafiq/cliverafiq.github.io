@@ -166,3 +166,10 @@ Clive found version 1 too plain and chose the world-map hero on October 6, 2026.
 - **Projects:** a full-width dark band (ink background) to change the page's pace. Each row leads with one large result figure, since the repos have no images yet; screenshots from Clive can replace them.
 - **Tokens:** two additions for the dark band, route on dark #7C9BFF and muted on dark #A7B3C3, both above 4.5:1 on ink.
 - **Name:** shown once, in the top bar. The hero keeps it for screen readers.
+
+## Revision 3: work experience and hero buttons
+
+Clive asked for more emphasis on his work experience and for the Resume and GitHub links to be buttons (October 6, 2026).
+
+- **Internships stand out:** World Salon, BFI Finance, and PhysioActive Indonesia show their resume bullets under a larger company name, with the role in the route color and bullets marked like station ticks. Other entries keep one line.
+- **Buttons:** in the hero, Resume is a filled button and GitHub an outlined one, both in the route color.

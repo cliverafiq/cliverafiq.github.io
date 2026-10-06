@@ -1,10 +1,14 @@
 export type StopId = 'jakarta' | 'tempe' | 'west-lafayette' | 'new-york';
 
-/** One line of work at a stop. `role` is the spec's "Role and dates" cell. */
+/**
+ * One entry at a stop. `role` is the spec's "Role and dates" cell.
+ * Internships carry their resume bullets as `points`; everything else has a one-line `line`.
+ */
 export interface Entry {
   org: string;
   role: string;
-  line: string;
+  line?: string;
+  points?: string[];
 }
 
 export interface Stop {

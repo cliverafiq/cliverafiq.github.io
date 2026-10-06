@@ -11,7 +11,13 @@ import { formatCoords } from '../lib/geo';
         <h3><span class="city">{stop.city}</span> <span class="years">{stop.years}</span></h3>
         <p class="coords">{formatCoords(stop.lat, stop.lon)}</p>
         <ul class="entries">
-          {stop.entries.map(entry => (
+          {stop.entries.map(entry => entry.points ? (
+            <li class="work">
+              <p class="org">{entry.org}</p>
+              <p class="role">{entry.role}</p>
+              <ul class="points">{entry.points.map(point => <li>{point}</li>)}</ul>
+            </li>
+          ) : (
             <li>
               <p class="org">{entry.org}</p>
               <p class="role">{entry.role}</p>
@@ -128,5 +134,46 @@ import { formatCoords } from '../lib/geo';
     margin-top: 4px;
     font-size: var(--t-small);
     color: var(--muted);
+  }
+  /* Internships: the work recruiters read first, so they get the most room. */
+  .entries .work {
+    padding-block: 22px 24px;
+  }
+  .work .org {
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .work .role {
+    margin-top: 4px;
+    font-size: var(--t-small);
+    font-weight: 500;
+    color: var(--route);
+  }
+  .points {
+    max-width: 70ch;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* Each bullet gets a short route-colored tick, like a station on the line. */
+  .points li {
+    position: relative;
+    padding-left: 26px;
+    border: 0;
+    padding-block: 0;
+  }
+  .points li + li {
+    margin-top: 8px;
+  }
+  .points li::before {
+    content: '';
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--route);
   }
 </style>

@@ -20,8 +20,15 @@ test('entries follow the spec table order and carry role and line', () => {
     ['Drift at StarkHacks, Purdue'],
     ['World Salon'],
   ]);
-  expect(stops[0].entries[0]).toEqual({ org: 'BFI Finance', role: 'Backend intern, Dec 2025 – Jan 2026',
-    line: 'Go microservices in a production loan workflow used daily by 6,000 loan officers serving about 400K customers' });
+  expect(stops[0].entries[0].role).toBe('Backend intern, Dec 2025 – Jan 2026');
+  for (const entry of stops.flatMap(s => s.entries)) expect(Boolean(entry.line) !== Boolean(entry.points), entry.org).toBe(true);
+});
+
+test('internships carry their resume bullets in order', () => {
+  const work = stops.flatMap(s => s.entries).filter(e => e.points).map(e => [e.org, e.points!.length]);
+  expect(work).toEqual([['BFI Finance', 3], ['PhysioActive Indonesia', 2], ['World Salon', 4]]);
+  expect(stops[3].entries[0].points![0]).toBe('Owned per-recipient read/unread tracking end to end on a serverless notification service (FastAPI, AWS Lambda, DynamoDB)');
+  expect(stops[0].entries[0].points![0]).toBe('Shipped Go microservices on Docker and Kubernetes into a production loan workflow used daily by 6,000 loan officers serving about 400K customers');
 });
 
 test('stopById finds stops and rejects unknown ids', () => {

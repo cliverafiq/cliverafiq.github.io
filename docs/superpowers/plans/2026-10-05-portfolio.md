@@ -975,3 +975,16 @@ Tests: each stop shows its coordinates ("6.2° S, 106.8° E" for Jakarta, "40.7�
 **Files:** Modify `src/styles/tokens.ts`, `src/data/types.ts` (`Project.figure: { value: string; label: string }`), `src/data/projects.ts`, `src/components/ProjectRow.astro`, `src/components/Projects.astro`, `src/pages/index.astro`, and the tests for contrast, base layout, projects, and page order.
 Figures: SlackDB "Winner" / "AutoDB track, VillageHacks"; Drift "48 hours" / "build time at StarkHacks"; MRI denoising "+11 dB" / "PSNR across about 3,000 MRI slices".
 Tests: the two dark tokens reach 4.5:1 on ink; `tokenStyle` carries eight tokens; each row shows its figure; the projects section is marked `data-tone="dark"` and spans the full width; sections still run in spec order.
+
+## Amendment: Revision 3
+
+### Task 15: Internships stand out on the route
+
+**Files:** Modify `src/data/types.ts` (`Entry.line` becomes optional; `Entry.points?: string[]`), `src/data/stops.ts`, `src/components/RouteSpine.astro`, `tests/data.test.ts`, `tests/route-spine.test.ts`
+Bullets come from the resume: World Salon 4, BFI Finance 3, PhysioActive Indonesia 2; those entries render as `li.work` with `.org`, `.role`, and `ul.points`.
+Tests: every entry has either a line or points; internships carry their bullets in resume order; the route renders them as `li.work`, other entries keep `.line`.
+
+### Task 16: Hero buttons
+
+**Files:** Modify `src/components/Hero.astro`, `src/styles/global.css` (`.button`, `.button.primary`), `tests/hero.test.ts`
+Tests: Resume is `a.button.primary`; GitHub is `a.button` without `primary`.

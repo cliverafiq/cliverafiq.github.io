@@ -14,7 +14,7 @@ test('each stop shows its city, years, and entries in spec order', async () => {
   expect([...tempe.querySelectorAll('.org')].map(p => p.textContent)).toEqual(['Arizona State University', 'SlackDB at VillageHacks', 'MRI denoising research']);
   const ny = doc.getElementById('stop-new-york')!;
   expect(ny.querySelector('.role')?.textContent).toBe('Backend developer intern, May – Aug 2026');
-  expect(ny.querySelector('.line')?.textContent).toBe('Real-time notifications on API Gateway WebSockets; unblocked production twice');
+  expect(ny.querySelector('.entries > li.work .points li')?.textContent).toBe('Owned per-recipient read/unread tracking end to end on a serverless notification service (FastAPI, AWS Lambda, DynamoDB)');
 });
 test('the markup alone shows a complete route', async () => {
   const doc = await renderDoc(RouteSpine);
@@ -26,4 +26,12 @@ test('each stop shows its coordinates like a station sign', async () => {
   const doc = await renderDoc(RouteSpine);
   expect(doc.querySelector('#stop-jakarta .coords')?.textContent).toBe('6.2° S, 106.8° E');
   expect(doc.querySelector('#stop-new-york .coords')?.textContent).toBe('40.7° N, 74.0° W');
+});
+test('internships stand out with their bullets while other entries keep one line', async () => {
+  const doc = await renderDoc(RouteSpine);
+  expect([...doc.querySelectorAll('.entries > li.work .org')].map(o => o.textContent)).toEqual(['BFI Finance', 'PhysioActive Indonesia', 'World Salon']);
+  expect(doc.querySelectorAll('#stop-new-york li.work .points li')).toHaveLength(4);
+  const asu = [...doc.querySelectorAll('#stop-tempe .entries > li')][0];
+  expect(asu.classList.contains('work')).toBe(false);
+  expect(asu.querySelector('.line')?.textContent).toBe('Graduating a year early');
 });

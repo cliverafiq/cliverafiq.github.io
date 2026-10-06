@@ -10,8 +10,23 @@ export const stops: Stop[] = [
     years: '2023–2026',
     win: 'Go services behind a 6,000-officer loan workflow',
     entries: [
-      { org: 'BFI Finance', role: 'Backend intern, Dec 2025 – Jan 2026', line: 'Go microservices in a production loan workflow used daily by 6,000 loan officers serving about 400K customers' },
-      { org: 'PhysioActive Indonesia', role: 'Full-stack intern, Jul 2024 – Jan 2025', line: 'Dashboard that cut employee response time 77%' },
+      {
+        org: 'BFI Finance',
+        role: 'Backend intern, Dec 2025 – Jan 2026',
+        points: [
+          'Shipped Go microservices on Docker and Kubernetes into a production loan workflow used daily by 6,000 loan officers serving about 400K customers',
+          'Built a Go media-caching service for WhatsApp customer documents, extending retention from two weeks to indefinite',
+          'Wired up event-driven processing with NATS, object storage, and internal APIs',
+        ],
+      },
+      {
+        org: 'PhysioActive Indonesia',
+        role: 'Full-stack intern, Jul 2024 – Jan 2025',
+        points: [
+          'Shipped a dashboard surfacing customer messages and performance metrics, cutting employee response time 77%',
+          'Built Python ETL pipelines in BigQuery that use LLMs to classify 10,000+ messages for same-day sentiment analysis',
+        ],
+      },
       { org: 'TechTrek Indonesia', role: 'Co-founder, Aug 2023 – Feb 2025', line: 'Python and VEX Robotics workshops for 30 students' },
     ],
   },
@@ -47,7 +62,16 @@ export const stops: Stop[] = [
     years: '2026',
     win: 'Real-time notifications on AWS',
     entries: [
-      { org: 'World Salon', role: 'Backend developer intern, May – Aug 2026', line: 'Real-time notifications on API Gateway WebSockets; unblocked production twice' },
+      {
+        org: 'World Salon',
+        role: 'Backend developer intern, May – Aug 2026',
+        points: [
+          'Owned per-recipient read/unread tracking end to end on a serverless notification service (FastAPI, AWS Lambda, DynamoDB)',
+          "Built real-time delivery on API Gateway WebSockets with Terraform, after finding that Socket.io's stateful connections couldn't run on Lambda",
+          'Unblocked production twice by root-causing a Python 3.12 ASGI adapter failure and JWKS auth fetches breaking across containers',
+          'Caught a race condition that marked in-flight notifications as successful, using a Bash harness later reused to verify idempotency',
+        ],
+      },
     ],
   },
 ];

@@ -1,5 +1,6 @@
 ---
 import { stops } from '../data/stops';
+import { formatCoords } from '../lib/geo';
 ---
 <section id="experience" class="experience" aria-labelledby="experience-title">
   <h2 id="experience-title">Experience</h2>
@@ -8,6 +9,7 @@ import { stops } from '../data/stops';
       <li class="stop" id={`stop-${stop.id}`} data-stop>
         <span class="dot" data-stop-dot aria-hidden="true"></span>
         <h3><span class="city">{stop.city}</span> <span class="years">{stop.years}</span></h3>
+        <p class="coords">{formatCoords(stop.lat, stop.lon)}</p>
         <ul class="entries">
           {stop.entries.map(entry => (
             <li>
@@ -32,7 +34,7 @@ import { stops } from '../data/stops';
   .spine {
     position: relative;
     margin: 0;
-    padding: 0 0 0 44px;
+    padding: 0 0 0 64px;
     list-style: none;
   }
   /* Track and fill share the left edge; without a script the fill covers the whole track. */
@@ -41,8 +43,9 @@ import { stops } from '../data/stops';
     content: '';
     position: absolute;
     top: 0;
-    left: 7px;
-    width: 3px;
+    left: 10px;
+    width: 8px;
+    border-radius: 4px;
   }
   .spine::before {
     bottom: 0;
@@ -58,7 +61,7 @@ import { stops } from '../data/stops';
   }
   .stop {
     position: relative;
-    margin-bottom: 56px;
+    margin-bottom: 72px;
     scroll-margin-top: 88px;
   }
   .stop:last-child {
@@ -68,12 +71,12 @@ import { stops } from '../data/stops';
   .dot {
     position: absolute;
     z-index: 1;
-    top: 6px;
-    left: -44px;
-    width: 17px;
-    height: 17px;
+    top: 9px;
+    left: -64px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    border: 3px solid var(--route);
+    border: 5px solid var(--ink);
     background: var(--route);
   }
   .spine[data-progress] .dot {
@@ -84,12 +87,23 @@ import { stops } from '../data/stops';
     background: var(--route);
   }
   .city {
-    font-size: var(--t-name);
+    font-size: 40px;
     font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+  .coords {
+    margin-top: 2px;
+    font-size: var(--t-label);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 640px) {
+    .city { font-size: 30px; }
   }
   .years {
-    margin-left: 8px;
-    font-size: var(--t-label);
+    margin-left: 10px;
+    font-size: var(--t-small);
     font-weight: 400;
     color: var(--muted);
   }

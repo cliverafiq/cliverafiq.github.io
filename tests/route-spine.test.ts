@@ -22,3 +22,8 @@ test('the markup alone shows a complete route', async () => {
   expect(doc.querySelectorAll('[data-stop-dot]')).toHaveLength(4);
   expect(doc.querySelector('[data-visited]')).toBeNull();
 });
+test('each stop shows its coordinates like a station sign', async () => {
+  const doc = await renderDoc(RouteSpine);
+  expect(doc.querySelector('#stop-jakarta .coords')?.textContent).toBe('6.2° S, 106.8° E');
+  expect(doc.querySelector('#stop-new-york .coords')?.textContent).toBe('40.7° N, 74.0° W');
+});

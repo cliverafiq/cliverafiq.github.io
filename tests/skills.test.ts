@@ -5,7 +5,7 @@ import { renderDoc } from './helpers/render';
 test('lists all 17 skills, each with a mini route in stop order', async () => {
   const doc = await renderDoc(SkillsFilter);
   const rows = [...doc.querySelectorAll('ul.skills > li')];
-  expect(rows).toHaveLength(17);
+  expect(rows).toHaveLength(18);
   const python = rows.find(r => r.querySelector('.skill')?.textContent === 'Python')!;
   expect([...python.querySelectorAll('.mini-dot')].map(d => d.hasAttribute('data-used'))).toEqual([true, true, false, true]);
   expect(python.querySelector('.mini-route')?.getAttribute('aria-label')).toBe('Used in Jakarta, Tempe, New York');

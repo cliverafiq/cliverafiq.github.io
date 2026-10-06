@@ -27,6 +27,7 @@ export const stops: Stop[] = [
           'Built Python ETL pipelines in BigQuery that use LLMs to classify 10,000+ messages for same-day sentiment analysis',
         ],
       },
+      { org: 'k-Chinese Postman research', role: 'Dec 2023 – Nov 2024', line: 'Route cost down by up to 22% using genetic algorithms and simulated annealing' },
       { org: 'TechTrek Indonesia', role: 'Co-founder, Aug 2023 – Feb 2025', line: 'Python and VEX Robotics workshops for 30 students' },
     ],
   },
@@ -39,7 +40,9 @@ export const stops: Stop[] = [
     win: 'AutoDB track win at VillageHacks',
     entries: [
       { org: 'Arizona State University', role: 'B.S.E. Computer Systems Engineering, Aug 2025 – May 2028', line: 'Graduating a year early' },
+      { org: 'SEDS Rocketry Division at ASU', role: 'Firmware engineer, Aug 2026 – now' },
       { org: 'SlackDB at VillageHacks', role: 'Apr 2026', line: 'AutoDB track winner' },
+      { org: 'Assistive wearable at the Fulton Schools', role: 'Aug – Nov 2025', line: 'Time, temperature, and compass direction through sound and touch, no sight required' },
       { org: 'MRI denoising research', role: 'Aug – Dec 2025', line: 'PSNR up about 11 dB across about 3,000 MRI slices' },
     ],
   },

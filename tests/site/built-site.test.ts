@@ -27,7 +27,7 @@ test('long names may wrap on narrow phones', () => {
   expect(css).toMatch(/overflow-wrap:\s*anywhere/);
 });
 test('assets ship with the site', () => {
-  for (const f of ['favicon.svg', 'og.png', 'Rafiq_Clive_Resume.pdf']) expect(existsSync(`dist/${f}`), f).toBe(true);
+  for (const f of ['favicon.svg', 'og.png', 'Rafiq_Clive_Resume.pdf', 'projects/assistive-wearable.jpg']) expect(existsSync(`dist/${f}`), f).toBe(true);
 });
 test('axe finds no violations it can check without a browser', async () => {
   const dom = new JSDOM(html, { runScripts: 'outside-only' });

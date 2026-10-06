@@ -173,3 +173,12 @@ Clive asked for more emphasis on his work experience and for the Resume and GitH
 
 - **Internships stand out:** World Salon, BFI Finance, and PhysioActive Indonesia show their resume bullets under a larger company name, with the role in the route color and bullets marked like station ticks. Other entries keep one line.
 - **Buttons:** in the hero, Resume is a filled button and GitHub an outlined one, both in the route color.
+
+## Revision 4: more experience and projects
+
+Added from Clive's LinkedIn on October 6, 2026.
+
+- **Experience:** SEDS Rocketry Division at ASU (firmware engineer since August 2026) joins the Tempe stop. Its one-line description is pending from Clive, so the entry shows its role alone.
+- **Projects:** the assistive wearable (August to November 2025, Tempe) leads with its photo. The k-Chinese Postman routing research (December 2023 to November 2024, Jakarta, repo cliverafiq/postman) leads with a "−22%" route-cost figure. Both also appear on the route.
+- **Skills:** C++ gains Tempe, and Pandas is added for Jakarta.
+- **Open question:** PhysioActive's end date is January 2025 on the resume but February 2025 on LinkedIn. The site keeps January until Clive confirms.

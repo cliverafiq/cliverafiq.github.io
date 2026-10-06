@@ -11,7 +11,9 @@ test('three project rows in spec order, each tied to its stop', async () => {
   ])).toEqual([
     ['project-slackdb', 'SlackDB', 'Tempe', 'Apr 2026'],
     ['project-drift', 'Drift', 'West Lafayette', 'Apr 2026'],
+    ['project-assistive-wearable', 'Assistive wearable', 'Tempe', 'Aug – Nov 2025'],
     ['project-mri-denoising', 'MRI denoising', 'Tempe', 'Aug – Dec 2025'],
+    ['project-k-chinese-postman', 'k-Chinese Postman routing', 'Jakarta', 'Dec 2023 – Nov 2024'],
   ]);
 });
 test('a row carries what it is, my part, the stack, the result, and links', async () => {
@@ -28,5 +30,9 @@ test('each row leads with one large result figure', async () => {
   const doc = await renderDoc(Projects);
   expect([...doc.querySelectorAll('article.project .figure')].map(f => [f.querySelector('.value')?.textContent, f.querySelector('.label')?.textContent])).toEqual([
     ['Winner', 'AutoDB track, VillageHacks'], ['48 hours', 'build time at StarkHacks'], ['+11 dB', 'PSNR across about 3,000 MRI slices'],
+    ['−22%', 'route cost at best, versus baseline heuristics'],
   ]);
+  const photo = doc.querySelector('#project-assistive-wearable .shot img')!;
+  expect([photo.getAttribute('src'), photo.getAttribute('width'), photo.getAttribute('height')]).toEqual(['/projects/assistive-wearable.jpg', '394', '324']);
+  expect(photo.getAttribute('alt')).toMatch(/^The assistive wearable on a wrist/);
 });

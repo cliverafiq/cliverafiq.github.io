@@ -21,7 +21,7 @@ import { formatCoords } from '../lib/geo';
             <li>
               <p class="org">{entry.org}</p>
               <p class="role">{entry.role}</p>
-              <p class="line">{entry.line}</p>
+              {entry.line && <p class="line">{entry.line}</p>}
             </li>
           ))}
         </ul>

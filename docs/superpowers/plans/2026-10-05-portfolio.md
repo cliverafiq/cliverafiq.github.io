@@ -988,3 +988,10 @@ Tests: every entry has either a line or points; internships carry their bullets 
 
 **Files:** Modify `src/components/Hero.astro`, `src/styles/global.css` (`.button`, `.button.primary`), `tests/hero.test.ts`
 Tests: Resume is `a.button.primary`; GitHub is `a.button` without `primary`.
+
+## Amendment: Revision 4
+
+### Task 17: New experience, projects, and skills
+
+**Files:** Modify `src/data/types.ts` (`Project.figure` optional, `Project.image?: { src; alt; width; height }`, an entry may have neither line nor points), `src/data/stops.ts`, `src/data/projects.ts`, `src/data/skills.ts`, `src/components/RouteSpine.astro` (line only when present), `src/components/ProjectRow.astro` (photo in the figure slot), `public/projects/assistive-wearable.jpg`, and the data, route, projects, skills, filter, and built-site tests.
+Tests: route order with the new entries; the SEDS entry shows its role alone; five projects in order; each project leads with exactly one of a figure or a photo; the wearable row shows its photo with alt text and dimensions; 18 skills, with C++ at Tempe and West Lafayette; the photo ships with the site.

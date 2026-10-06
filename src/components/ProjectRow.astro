@@ -11,7 +11,13 @@ const stop = stopById(project.stop);
 ---
 <article class="project" id={`project-${project.slug}`}>
   <p class="marker"><span class="city">{stop.city}</span> <span class="date">{project.date}</span></p>
-  <p class="figure"><span class="value">{project.figure.value}</span> <span class="label">{project.figure.label}</span></p>
+  {project.image ? (
+    <figure class="shot">
+      <img src={project.image.src} alt={project.image.alt} width={project.image.width} height={project.image.height} loading="lazy" decoding="async" />
+    </figure>
+  ) : project.figure && (
+    <p class="figure"><span class="value">{project.figure.value}</span> <span class="label">{project.figure.label}</span></p>
+  )}
   <div class="body">
     <h3>{project.name}</h3>
     <p class="summary">{project.summary}</p>
@@ -37,7 +43,7 @@ const stop = stopById(project.stop);
   }
   .marker { grid-area: marker; }
   .body { grid-area: body; }
-  .figure { grid-area: figure; }
+  .figure, .shot { grid-area: figure; }
   .marker {
     position: relative;
     display: flex;
@@ -74,6 +80,17 @@ const stop = stopById(project.stop);
   }
   .figure {
     text-align: right;
+  }
+  .shot {
+    margin: 0;
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    max-width: 394px;
+    height: auto;
+    margin-left: auto;
+    border-radius: 8px;
   }
   .value {
     display: block;
@@ -135,6 +152,7 @@ const stop = stopById(project.stop);
       row-gap: 20px;
     }
     .figure { text-align: left; }
+    .shot img { margin-left: 0; }
   }
   @media (max-width: 640px) {
     .project {

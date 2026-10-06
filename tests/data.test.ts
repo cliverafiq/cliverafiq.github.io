@@ -15,13 +15,13 @@ test('stops run in journey order with the spec years and wins', () => {
 
 test('entries follow the spec table order and carry role and line', () => {
   expect(stops.map(s => s.entries.map(e => e.org))).toEqual([
-    ['BFI Finance', 'PhysioActive Indonesia', 'TechTrek Indonesia'],
-    ['Arizona State University', 'SlackDB at VillageHacks', 'MRI denoising research'],
+    ['BFI Finance', 'PhysioActive Indonesia', 'k-Chinese Postman research', 'TechTrek Indonesia'],
+    ['Arizona State University', 'SEDS Rocketry Division at ASU', 'SlackDB at VillageHacks', 'Assistive wearable at the Fulton Schools', 'MRI denoising research'],
     ['Drift at StarkHacks, Purdue'],
     ['World Salon'],
   ]);
   expect(stops[0].entries[0].role).toBe('Backend intern, Dec 2025 – Jan 2026');
-  for (const entry of stops.flatMap(s => s.entries)) expect(Boolean(entry.line) !== Boolean(entry.points), entry.org).toBe(true);
+  for (const entry of stops.flatMap(s => s.entries)) expect(Boolean(entry.line && entry.points), entry.org).toBe(false);
 });
 
 test('internships carry their resume bullets in order', () => {
@@ -40,8 +40,12 @@ test('projects follow the spec order, point at stops, and link over https', () =
   expect(projects.map(p => [p.slug, p.name, p.stop, p.date])).toEqual([
     ['slackdb', 'SlackDB', 'tempe', 'Apr 2026'],
     ['drift', 'Drift', 'west-lafayette', 'Apr 2026'],
+    ['assistive-wearable', 'Assistive wearable', 'tempe', 'Aug – Nov 2025'],
     ['mri-denoising', 'MRI denoising', 'tempe', 'Aug – Dec 2025'],
+    ['k-chinese-postman', 'k-Chinese Postman routing', 'jakarta', 'Dec 2023 – Nov 2024'],
   ]);
+  for (const p of projects) expect(Boolean(p.figure) !== Boolean(p.image), p.name).toBe(true);
+  expect(projects.find(p => p.slug === 'assistive-wearable')?.image?.src).toBe('/projects/assistive-wearable.jpg');
   expect(projects[0].links).toEqual([
     { label: 'Code', href: 'https://github.com/cliverafiq/SlackDB' },
     { label: 'Demo', href: 'https://slackdb.vercel.app/' },
@@ -50,7 +54,8 @@ test('projects follow the spec order, point at stops, and link over https', () =
 });
 
 test('every skill has a known category and lists real stops in route order', () => {
-  expect(skills).toHaveLength(17);
+  expect(skills).toHaveLength(18);
+  expect(skills.find(s => s.name === 'C++')?.usedAt).toEqual(['tempe', 'west-lafayette']);
   expect(categoryLabels).toEqual({ languages: 'Languages', 'backend-infra': 'Backend and infra', 'data-ml': 'Data and ML', hardware: 'Hardware' });
   const order = stops.map(s => s.id);
   for (const skill of skills) {

@@ -22,7 +22,7 @@ test('Hardware shows only ESP32 and WebSerial', () => {
 test('All brings every skill back', () => {
   press('Languages');
   press('All');
-  expect(visible()).toHaveLength(17);
+  expect(visible()).toHaveLength(18);
 });
 test('exactly one filter is pressed after any sequence of clicks', () => {
   press('Languages'); press('Data and ML'); press('Languages');

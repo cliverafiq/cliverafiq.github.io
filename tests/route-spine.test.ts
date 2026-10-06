@@ -11,7 +11,10 @@ test('each stop shows its city, years, and entries in spec order', async () => {
   const tempe = doc.getElementById('stop-tempe')!;
   expect(tempe.querySelector('h3 .city')?.textContent).toBe('Tempe');
   expect(tempe.querySelector('h3 .years')?.textContent).toBe('2025–now');
-  expect([...tempe.querySelectorAll('.org')].map(p => p.textContent)).toEqual(['Arizona State University', 'SlackDB at VillageHacks', 'MRI denoising research']);
+  expect([...tempe.querySelectorAll('.org')].map(p => p.textContent)).toEqual(['Arizona State University', 'SEDS Rocketry Division at ASU', 'SlackDB at VillageHacks', 'Assistive wearable at the Fulton Schools', 'MRI denoising research']);
+  const seds = [...tempe.querySelectorAll('.entries > li')][1];
+  expect(seds.querySelector('.role')?.textContent).toBe('Firmware engineer, Aug 2026 – now');
+  expect(seds.querySelector('.line')).toBeNull();
   const ny = doc.getElementById('stop-new-york')!;
   expect(ny.querySelector('.role')?.textContent).toBe('Backend developer intern, May – Aug 2026');
   expect(ny.querySelector('.entries > li.work .points li')?.textContent).toBe('Owned per-recipient read/unread tracking end to end on a serverless notification service (FastAPI, AWS Lambda, DynamoDB)');

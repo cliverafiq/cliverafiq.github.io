@@ -1,0 +1,112 @@
+---
+import { stopById } from '../data/stops';
+import type { Project } from '../data/types';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const stop = stopById(project.stop);
+---
+<article class="project" id={`project-${project.slug}`}>
+  <p class="marker"><span class="city">{stop.city}</span> <span class="date">{project.date}</span></p>
+  <div class="body">
+    <h3>{project.name}</h3>
+    <p class="summary">{project.summary}</p>
+    <p class="part">My part: {project.part}</p>
+    <p class="stack">{project.stack.join(', ')}</p>
+    <div class="outcome">
+      <p class="result">{project.result}</p>
+      <p class="links">{project.links.map(link => <a href={link.href}>{link.label}</a>)}</p>
+    </div>
+  </div>
+</article>
+
+<style>
+  .project {
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr);
+    column-gap: 24px;
+    padding-block: 28px;
+    border-top: 1px solid var(--hairline);
+  }
+  /* A short piece of the route with a hollow stop, tying the project to its city. */
+  .marker {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: 26px;
+    font-size: var(--t-label);
+    color: var(--muted);
+  }
+  .marker::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 6px;
+    width: 3px;
+    height: 52px;
+    background: var(--route);
+  }
+  .marker::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 3px solid var(--route);
+    background: var(--page);
+  }
+  .city {
+    font-size: var(--t-small);
+    font-weight: 500;
+    color: var(--ink);
+  }
+  h3 {
+    font-size: var(--t-name);
+  }
+  .summary {
+    margin-top: 6px;
+    color: var(--muted);
+  }
+  .part {
+    margin-top: 10px;
+  }
+  .stack {
+    margin-top: 10px;
+    font-size: var(--t-label);
+    color: var(--muted);
+  }
+  .outcome {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    max-width: 70ch;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--hairline);
+  }
+  .links {
+    display: flex;
+    gap: 20px;
+    font-size: var(--t-small);
+  }
+  @media (max-width: 640px) {
+    .project {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 14px;
+    }
+    .marker {
+      flex-direction: row;
+      gap: 8px;
+    }
+    .marker::before {
+      display: none;
+    }
+  }
+</style>

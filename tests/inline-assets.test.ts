@@ -22,3 +22,8 @@ test('drops WOFF fallbacks, which no current browser needs once WOFF2 is inline'
   const out = inlineAssets('<link rel="stylesheet" href="/_astro/a.css">', (path: string) => (path === '/_astro/a.css' ? Buffer.from(css) : Buffer.from([0, 1, 2])));
   expect(out).toBe('<style>@font-face{src:url(data:font/woff2;base64,AAEC)format("woff2")}</style>');
 });
+
+test('inlines local images, such as project photos, as data URIs', () => {
+  const out = inlineAssets('<img src="/projects/a.jpg" alt="a"><a href="/Rafiq_Clive_Resume.pdf">r</a>', (path: string) => (path === '/projects/a.jpg' ? Buffer.from([0, 1, 2]) : Buffer.from('')));
+  expect(out).toBe('<img src="data:image/jpeg;base64,AAEC" alt="a"><a href="/Rafiq_Clive_Resume.pdf">r</a>');
+});

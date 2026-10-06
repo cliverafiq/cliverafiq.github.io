@@ -3,12 +3,12 @@
   --t-small: 16px;
   --t-body: 18px;
   --t-name: 24px;
-  --t-section: 36px;
-  --t-headline: 48px;
+  --t-section: 48px;
+  --t-headline: 72px;
   --bar: 64px;
 }
 @media (max-width: 640px) {
-  :root { --t-headline: 32px; --t-section: 28px; }
+  :root { --t-headline: 40px; --t-section: 32px; }
 }
 
 *, *::before, *::after { box-sizing: border-box; }

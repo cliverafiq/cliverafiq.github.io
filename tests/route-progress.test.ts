@@ -58,3 +58,12 @@ test('cleanup stops further updates', () => {
   scroll(2500);
   expect($('[data-spine]').style.getPropertyValue('--fill')).toBe('0px');
 });
+test('a late layout change, like web fonts loading, refreshes the progress', () => {
+  scroll(1200, false);
+  place($$('[data-stop-dot]')[1], 1800, 16); // before fonts load, Tempe sits below the probe at 1750
+  start();
+  expect(visited()).toEqual([true, false, false, false]);
+  place($$('[data-stop-dot]')[1], 1400, 16); // fonts arrive and the layout shifts Tempe above it
+  win.dispatchEvent(new win.Event('load'));
+  expect(visited()).toEqual([true, true, false, false]);
+});

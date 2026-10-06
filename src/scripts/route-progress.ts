@@ -52,8 +52,12 @@ export function initRouteProgress(
   update();
   win.addEventListener('scroll', onChange, { passive: true });
   win.addEventListener('resize', onChange);
+  // Web fonts and late layout move the stops after the first pass; measure again once they settle.
+  win.addEventListener('load', onChange);
+  win.document.fonts?.ready.then(onChange);
   return () => {
     win.removeEventListener('scroll', onChange);
     win.removeEventListener('resize', onChange);
+    win.removeEventListener('load', onChange);
   };
 }

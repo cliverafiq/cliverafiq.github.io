@@ -3,3 +3,5 @@ dist/
 .astro/
 preview/
 scripts/.fonts/
+.superpowers/
+.playwright-mcp/

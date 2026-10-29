@@ -1,9 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
+import TopBar from '../components/TopBar.astro';
+import LayerBar from '../components/LayerBar.astro';
+import Hero from '../components/Hero.astro';
+import Stack from '../components/Stack.astro';
+import WorkEntry from '../components/WorkEntry.astro';
+import AlsoList from '../components/AlsoList.astro';
+import Contact from '../components/Contact.astro';
+import { work } from '../data/work';
 ---
 <Base
   title="Clive Rafiq, backend engineer"
-  description="Backend engineer and Computer Systems Engineering student at ASU, shipping production systems from Jakarta to New York."
+  description="Backend engineer and Computer Systems Engineering student at ASU, with production work at World Salon and BFI Finance and projects from firmware to the cloud."
 >
-  <main></main>
+  <TopBar />
+  <LayerBar />
+  <main class="page">
+    <Hero />
+    <aside class="pin"><div class="pin-inner"><Stack /></div></aside>
+    <section id="work" aria-labelledby="work-title">
+      <h2 id="work-title" class="visually-hidden">Work</h2>
+      {work.map(entry => <WorkEntry entry={entry} />)}
+    </section>
+    <AlsoList />
+    <Contact />
+  </main>
 </Base>

@@ -13,7 +13,7 @@ export const work: WorkEntry[] = [
   { slug: 'slackdb', name: 'SlackDB', role: 'VillageHacks at ASU', dates: 'Apr 2026',
     text: 'Text-to-SQL in Slack, with guardrails to block destructive production changes from LLM-written SQL: risk-scored migrations, sandbox validation, rollback detection, and approver enforcement. I designed the guardrails and shipped the FastAPI backend.',
     award: 'AutoDB track winner', layers: ['data', 'product'],
-    links: [{ label: 'Code', href: 'https://github.com/cliverafiq/SlackDB' }, { label: 'Demo', href: 'https://slackdb.vercel.app/' }] },
+    links: [{ label: 'Code', href: 'https://github.com/AayushP123/slackdb' }, { label: 'Demo', href: 'https://slackdb.vercel.app/' }] },
   { slug: 'drift', name: 'Drift', role: 'StarkHacks at Purdue', dates: 'Apr 2026',
     text: 'A passive focus tracker. I wrote the ESP32 firmware in C++ and a two-way WebSerial protocol, learning both during the hackathon.',
     highlight: { value: '48 hours', label: 'to build' }, layers: ['firmware', 'hardware'],

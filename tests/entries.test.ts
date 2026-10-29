@@ -22,7 +22,7 @@ test('SlackDB shows its award and links', async () => {
   const el = (await renderDoc(WorkEntry, { entry: entry('slackdb') })).querySelector('article')!;
   expect(shape(el)).toEqual(['h3', 'p.meta', 'p.text', 'p.award', 'ul.tags', 'p.links']);
   expect([...el.querySelectorAll('.links a')].map(a => [a.textContent, a.getAttribute('href')])).toEqual([
-    ['Code', 'https://github.com/cliverafiq/SlackDB'], ['Demo', 'https://slackdb.vercel.app/'],
+    ['Code', 'https://github.com/AayushP123/slackdb'], ['Demo', 'https://slackdb.vercel.app/'],
   ]);
 });
 test('the wearable shows its photo, and SEDS shows its role alone', async () => {

@@ -19,8 +19,8 @@ test('reduced motion switches animation off', () => {
   expect(css).toMatch(/@media\s*\(prefers-reduced-motion:\s*reduce\)/);
 });
 test('jumps to an entry clear the top bar, and the layer bar on phones', () => {
-  expect(css).toMatch(/scroll-margin-top:\s*80px/);
-  expect(css).toMatch(/scroll-margin-top:\s*128px/);
+  expect(css).toMatch(/(?<!\d)scroll-padding-top:\s*80px/);
+  expect(css).toMatch(/(?<!\d)scroll-padding-top:\s*128px/);
 });
 test('long names wrap, and the tilted stack cannot push the page sideways on phones', () => {
   expect(css).toMatch(/overflow-wrap:\s*anywhere/);

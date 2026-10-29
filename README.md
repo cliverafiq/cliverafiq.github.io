@@ -22,7 +22,7 @@ npm run test:site  # builds the site, then checks the built output
 
 1. Add it to `work` in `src/data/work.ts`, in page order, with its layers.
 2. If it introduces new tech, add that to its layer in `src/data/layers.ts`.
-3. Run `npm test`.
+3. Run `npm test`. `tests/data.test.ts` and `tests/entries.test.ts` pin the current entries and their order, so update them along with the new entry.
 
 ## Update the link-preview image
 

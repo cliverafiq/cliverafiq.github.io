@@ -81,8 +81,9 @@ a {
   .pin-inner { scale: .88; }
 }
 
-/* Jumps land below the top bar. The home link's target goes to the very top. */
-#top, .entry, #also, #contact { scroll-margin-top: 80px; }
+/* Jumps and keyboard focus land below the sticky top bar. Padding on the scroller (not
+   margin on targets) also keeps focused links out from under the bars. #top still reaches 0. */
+html { scroll-padding-top: 80px; }
 
 /* Phones: one column, the smaller stack under the hero, the layer bar under the top bar. */
 @media (width < 900px) {
@@ -102,7 +103,7 @@ a {
   }
   .pin-inner { position: static; height: 100%; }
   /* The top bar, the layer bar, and 16 px. */
-  #top, .entry, #also, #contact { scroll-margin-top: 128px; }
+  html { scroll-padding-top: 128px; }
 }
 
 /* Buttons: filled for the main action, outlined for the rest. Color changes only, no movement. */

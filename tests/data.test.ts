@@ -24,6 +24,15 @@ test('work runs in the spec order on the spec layers', () => {
     ['seds-rocketry', 'SEDS Rocketry Division at ASU', ['firmware']],
   ]);
 });
+test('every entry has a layer, uses real layers, and has a unique slug', () => {
+  const ids = layers.map(l => l.id);
+  for (const w of work) {
+    expect(w.layers.length, w.slug).toBeGreaterThan(0);
+    for (const id of w.layers) expect(ids, `${w.slug} uses ${id}`).toContain(id);
+  }
+  const slugs = work.map(w => w.slug);
+  expect(new Set(slugs).size).toBe(slugs.length);
+});
 test('every layer has an entry, and its link goes to the first one', () => {
   expect(layers.map(l => firstEntryOn(l.id).slug)).toEqual(['drift', 'drift', 'world-salon', 'world-salon', 'physioactive']);
 });
@@ -38,7 +47,7 @@ test('each entry leads with at most one of a highlight, an award, or a photo', (
 test('links use https, and SlackDB keeps its code and demo', () => {
   for (const link of [...work.flatMap(w => w.links), ...also.flatMap(a => (a.link ? [a.link] : []))]) expect(link.href).toMatch(/^https:\/\//);
   expect(work.find(w => w.slug === 'slackdb')?.links).toEqual([
-    { label: 'Code', href: 'https://github.com/cliverafiq/SlackDB' }, { label: 'Demo', href: 'https://slackdb.vercel.app/' },
+    { label: 'Code', href: 'https://github.com/AayushP123/slackdb' }, { label: 'Demo', href: 'https://slackdb.vercel.app/' },
   ]);
 });
 test('also lists the three smaller pieces in order', () => {

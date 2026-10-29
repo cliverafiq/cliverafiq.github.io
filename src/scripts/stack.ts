@@ -36,6 +36,8 @@ export function initStack(
       { entryTops: entries.map(top), entriesEnd: top(also), contactTop: top(contact) },
       probe,
     );
+    // Measured with the rest, before any attribute write, so layout is read once.
+    const heroGone = hero ? hero.getBoundingClientRect().bottom < 0 : false;
     const lit = new Set(
       view.active >= 0 ? (entries[view.active].getAttribute('data-layers') ?? '').split(/\s+/).filter(Boolean) : [],
     );
@@ -51,15 +53,17 @@ export function initStack(
       stack.setAttribute('data-pulse', pulse ? 'a' : 'b');
     }
     previous = key;
-    if (bar && hero) bar.toggleAttribute('data-show', hero.getBoundingClientRect().bottom < 0);
+    if (bar && hero) bar.toggleAttribute('data-show', heroGone);
   };
 
   let pending = false;
+  let disposed = false;
   const onChange = () => {
-    if (pending) return;
+    if (disposed || pending) return;
     pending = true;
     schedule(() => {
       pending = false;
+      if (disposed) return;
       update();
     });
   };
@@ -77,6 +81,7 @@ export function initStack(
   const tilt = fine && !reduced;
   if (tilt) win.addEventListener('pointermove', onPointer as EventListener);
   return () => {
+    disposed = true;
     win.removeEventListener('scroll', onChange);
     win.removeEventListener('resize', onChange);
     win.removeEventListener('load', onChange);

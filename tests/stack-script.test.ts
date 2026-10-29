@@ -95,3 +95,12 @@ test('cleanup stops further updates', () => {
   const stop = start(); stop(); scroll(1700);
   expect($('[data-stack]').hasAttribute('data-lit')).toBe(false);
 });
+test('a fonts.ready that resolves after cleanup changes nothing', async () => {
+  let resolve!: () => void;
+  const ready = new Promise<void>(r => { resolve = r; });
+  Object.defineProperty(win.document, 'fonts', { value: { ready }, configurable: true });
+  const stop = start(); stop();
+  scroll(1700, false);
+  resolve(); await Promise.resolve(); await Promise.resolve();
+  expect($('[data-stack]').hasAttribute('data-lit')).toBe(false);
+});

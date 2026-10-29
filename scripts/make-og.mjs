@@ -7,7 +7,6 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { Resvg } from '@resvg/resvg-js';
 import wawoff2 from 'wawoff2';
 import { profile } from '../src/data/profile.ts';
-import { stops } from '../src/data/stops.ts';
 import { tokens } from '../src/styles/tokens.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -26,22 +25,11 @@ async function fontFiles() {
 function svg() {
   const [first, ...rest] = profile.headline.split('. ');
   const lines = [`${first}.`, rest.join('. ')];
-  const x0 = 140;
-  const x1 = 1060;
-  const y = 470;
-  const step = (x1 - x0) / (stops.length - 1);
-  const marks = stops.map((stop, i) => {
-    const x = x0 + i * step;
-    return `<circle cx="${x}" cy="${y}" r="12" fill="${tokens.page}" stroke="${tokens.route}" stroke-width="6"/>`
-      + `<text x="${x}" y="${y + 58}" text-anchor="middle" font-size="26" fill="${tokens.muted}">${stop.city}</text>`;
-  }).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">`
     + `<rect width="1200" height="630" fill="${tokens.page}"/>`
     + `<g font-family="Overpass">`
     + `<text x="80" y="150" font-size="56" font-weight="500" fill="${tokens.ink}">${profile.name}</text>`
     + lines.map((line, i) => `<text x="80" y="${250 + i * 56}" font-size="40" fill="${tokens.ink}">${line}</text>`).join('')
-    + `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="${tokens.route}" stroke-width="6"/>`
-    + marks
     + `</g></svg>`;
 }
 

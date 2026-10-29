@@ -1,0 +1,163 @@
+---
+import { layers } from '../data/layers';
+import { firstEntryOn } from '../data/work';
+
+// Plates read top to bottom (Product first); --i is each layer's height in the stack (Hardware is 0).
+const plates = layers.map((layer, i) => ({ ...layer, i })).reverse();
+---
+<nav class="stack" data-stack aria-label="Layers">
+  {plates.map(({ id, name, color, text, tech, i }) => (
+    <a class="plate" data-layer={id} href={`#entry-${firstEntryOn(id).slug}`} style={`--i:${i};--c:${color};--t:${text}`}>
+      <span class="name">{name}</span>
+      <span class="tech" aria-hidden="true">{tech.map(t => <span>{t}</span>)}</span>
+    </a>
+  ))}
+  <span class="trace" data-trace aria-hidden="true"></span>
+  <span class="trace" data-trace aria-hidden="true"></span>
+  <span class="trace" data-trace aria-hidden="true"></span>
+  <span class="trace" data-trace aria-hidden="true"></span>
+</nav>
+
+<style>
+  .stack {
+    --gap: 64px;
+    --corner: 14px;
+    position: relative;
+    width: 300px;
+    height: 196px;
+    transform-style: preserve-3d;
+    /* Turn about the middle of the pile, not its bottom plate, so the split stack sits centered in its box. */
+    transform-origin: 50% 50% calc(2 * var(--gap));
+    transform: rotateX(calc(58deg + var(--rx, 0deg))) rotateZ(calc(-38deg + var(--rz, 0deg)));
+    transition: transform 300ms ease-out, transform-origin 300ms ease-out;
+  }
+  .stack[data-closed] { --gap: 5px; }
+
+  /* Text sits on the front edge, the part the plate above leaves in view, and to the right,
+     clear of the trace that climbs from the front corner. */
+  .plate {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 14px 16px;
+    border: 1.5px solid rgb(0 0 0 / .35);
+    border-radius: var(--corner);
+    background: var(--c);
+    color: var(--t);
+    box-shadow: 0 18px 30px rgb(0 0 0 / .18);
+    text-decoration: none;
+    transform-style: preserve-3d;
+    transform: translateZ(calc(var(--i) * var(--gap) + var(--lift, 0px)));
+    transition: transform 300ms ease-out, opacity 300ms ease-out, filter 300ms ease-out;
+    animation: split 1000ms cubic-bezier(.2, .8, .2, 1) backwards;
+    animation-delay: calc(var(--i) * 60ms);
+  }
+  /* Thickness: the plate's underside, 8 px down, showing as a darker edge. */
+  .plate::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -1.5px;
+    border: 1.5px solid rgb(0 0 0 / .35);
+    border-radius: inherit;
+    background: color-mix(in srgb, var(--c) 70%, #000);
+    transform: translateZ(-8px);
+    /* Back only once a brightening plate is opaque again (see below). */
+    transition: visibility 0s 300ms;
+  }
+  .plate[data-on] { --lift: 20px; }
+  /* Unlit plates dim, unless the keyboard is on them (on its own, the focus rule below loses on specificity). */
+  .stack[data-lit] .plate:not([data-on]):not(:focus-visible) {
+    opacity: .3;
+    filter: saturate(.3);
+  }
+  /* Opacity flattens a plate, and a flat plate would paint its underside over its face. */
+  .stack[data-lit] .plate:not([data-on]):not(:focus-visible)::after {
+    visibility: hidden;
+    transition: none;
+  }
+  .plate:focus-visible {
+    opacity: 1;
+    filter: none;
+    outline: 3px solid var(--ink);
+    outline-offset: 4px;
+  }
+
+  .name {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .tech {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+  .tech span {
+    padding: 4px 8px;
+    border-radius: 5px;
+    background: rgb(0 0 0 / .18);
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  /* Traces stand at the four corners, from the bottom plate up to the top one. */
+  .trace {
+    position: absolute;
+    width: 2px;
+    height: calc(4 * var(--gap));
+    background:
+      linear-gradient(to top, transparent, var(--ink)) 0 calc(100% + 40px) / 100% 40px no-repeat,
+      color-mix(in srgb, var(--ink) 25%, transparent);
+    transform-origin: top;
+    transform: translateZ(calc(4 * var(--gap))) rotateX(-90deg);
+    transition: transform 300ms ease-out, height 300ms ease-out;
+    /* Rises with the top plate, which starts last (4 × 60 ms). */
+    animation: rise 1000ms cubic-bezier(.2, .8, .2, 1) 240ms backwards;
+  }
+  /* Each trace hangs from its top edge, so that edge sits on the corner. */
+  .trace:nth-of-type(1) { top: var(--corner); left: calc(var(--corner) - 1px); }
+  .trace:nth-of-type(2) { top: var(--corner); right: calc(var(--corner) - 1px); }
+  .trace:nth-of-type(3) { top: calc(100% - var(--corner)); left: calc(var(--corner) - 1px); }
+  .trace:nth-of-type(4) { top: calc(100% - var(--corner)); right: calc(var(--corner) - 1px); }
+  /* Two identical pulses, so flipping between them restarts it. The load rise is kept in the list so a pulse never cuts it short. */
+  .stack[data-pulse="a"] .trace { animation: rise 1000ms cubic-bezier(.2, .8, .2, 1) 240ms backwards, pulse-a 400ms ease-in-out; }
+  .stack[data-pulse="b"] .trace { animation: rise 1000ms cubic-bezier(.2, .8, .2, 1) 240ms backwards, pulse-b 400ms ease-in-out; }
+
+  @keyframes split {
+    from { transform: translateZ(calc(var(--i) * 5px)); }
+  }
+  @keyframes rise {
+    from { height: calc(4 * 5px); transform: translateZ(calc(4 * 5px)) rotateX(-90deg); }
+  }
+  /* The bright segment waits just below the trace and runs out past its top. */
+  @keyframes pulse-a {
+    from { background-position: 0 calc(100% + 40px); }
+    to { background-position: 0 -40px; }
+  }
+  @keyframes pulse-b {
+    from { background-position: 0 calc(100% + 40px); }
+    to { background-position: 0 -40px; }
+  }
+
+  @media (width < 900px) {
+    .stack {
+      --gap: 48px;
+      width: 220px;
+      height: 144px;
+    }
+    /* Phone plates leave the chips half under the plate above; the names alone read cleaner. */
+    .tech { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .plate[data-on] { --lift: 0px; }
+  }
+</style>

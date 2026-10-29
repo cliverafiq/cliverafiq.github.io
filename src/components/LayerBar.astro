@@ -11,10 +11,10 @@ import { firstEntryOn } from '../data/work';
 <style>
   .layer-bar { display: none; }
   @media (max-width: 899.98px) {
-    .layer-bar { position: sticky; top: var(--bar); z-index: 19; height: 48px; display: flex; visibility: hidden; background: var(--page); border-bottom: 1px solid var(--hairline); }
+    .layer-bar { position: sticky; top: var(--bar); z-index: 19; height: 48px; box-sizing: border-box; display: flex; visibility: hidden; background: var(--page); border-bottom: 1px solid var(--hairline); }
     .layer-bar[data-show] { visibility: visible; }
     .layer-bar a { flex: 1; background: var(--c); transition: opacity 300ms; }
     .layer-bar[data-lit] a:not([data-on]) { opacity: .3; }
-    .layer-bar .label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; font: 500 13px 'Geist Mono', ui-monospace, monospace; color: var(--ink); }
+    .layer-bar .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 3px 10px; border-radius: 99px; background: var(--page); white-space: nowrap; pointer-events: none; font: 500 13px 'Geist Mono', ui-monospace, monospace; color: var(--ink); }
   }
 </style>

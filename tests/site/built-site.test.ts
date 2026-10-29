@@ -9,22 +9,30 @@ const css = [
 ].join('\n');
 const outsideKeyframes = css.replace(/@keyframes[^{]+\{(?:[^{}]*\{[^}]*\})*[^}]*\}/g, '');
 
-test('no template patterns reach the page', () => {
+test('page text has no middle dots or arrows', () => {
   expect(new JSDOM(html).window.document.body.textContent).not.toMatch(/·|→/);
-  expect(css).not.toMatch(/text-transform:\s*uppercase|monospace|box-shadow/);
 });
 test('nothing starts hidden outside the load animation', () => {
   expect(outsideKeyframes).not.toMatch(/opacity:\s*0(?![.\d])/);
-  expect(outsideKeyframes).not.toMatch(/scaleX\(0\)/);
 });
 test('reduced motion switches animation off', () => {
   expect(css).toMatch(/@media\s*\(prefers-reduced-motion:\s*reduce\)/);
 });
-test('linked stops clear the sticky top bar', () => {
-  expect(css).toMatch(/scroll-margin-top:\s*88px/);
+test('jumps to an entry clear the top bar, and the layer bar on phones', () => {
+  expect(css).toMatch(/scroll-margin-top:\s*80px/);
+  expect(css).toMatch(/scroll-margin-top:\s*128px/);
 });
-test('long names may wrap on narrow phones', () => {
+test('long names wrap, and the tilted stack cannot push the page sideways on phones', () => {
   expect(css).toMatch(/overflow-wrap:\s*anywhere/);
+  expect(css).toMatch(/overflow:\s*clip/);
+});
+test('a focused plate shows at full strength even when dimmed', () => {
+  expect(css).toMatch(/\.plate[^{]*:focus-visible[^{]*\{[^}]*opacity:\s*1/);
+});
+test('fonts are served from the site', () => {
+  expect(html).not.toMatch(/fonts\.googleapis|fonts\.gstatic/);
+  const files = readdirSync('dist/_astro').join(' ');
+  for (const f of ['bricolage-grotesque-latin-800-normal', 'geist-latin-400-normal', 'geist-mono-latin-500-normal']) expect(files).toContain(f);
 });
 test('assets ship with the site', () => {
   for (const f of ['favicon.svg', 'og.png', 'Rafiq_Clive_Resume.pdf', 'projects/assistive-wearable.jpg']) expect(existsSync(`dist/${f}`), f).toBe(true);

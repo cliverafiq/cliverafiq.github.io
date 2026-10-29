@@ -1,0 +1,24 @@
+---
+import { profile } from '../data/profile';
+---
+<section id="contact" data-contact aria-labelledby="contact-title">
+  <h2 id="contact-title">Let's talk.</h2>
+  <p class="contact-links">
+    <a href={`mailto:${profile.email}`}>Email</a>
+    <a href={profile.linkedin}>LinkedIn</a>
+    <a href={profile.github}>GitHub</a>
+    <a href={profile.resumePath}>Resume</a>
+  </p>
+</section>
+
+<style>
+  section { padding-block: 64px 96px; }
+  h2 {
+    margin: 0;
+    font: 800 48px/1 'Bricolage Grotesque', system-ui, sans-serif;
+    letter-spacing: -0.03em;
+  }
+  @media (max-width: 899px) { h2 { font-size: 34px; } }
+  .contact-links { margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 12px 28px; font: 500 17px/1.4 'Geist', system-ui, sans-serif; }
+  a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+</style>

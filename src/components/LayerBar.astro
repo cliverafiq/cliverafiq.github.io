@@ -2,7 +2,7 @@
 import { layers } from '../data/layers';
 import { firstEntryOn } from '../data/work';
 ---
-<nav class="layer-bar" data-layer-bar aria-label="Layers">
+<nav class="layer-bar" data-layer-bar aria-label="Layer shortcuts">
   {layers.map(l => (
     <a data-layer={l.id} href={`#entry-${firstEntryOn(l.id).slug}`} style={`--c:${l.color}`}><span class="visually-hidden">{l.name}</span></a>
   ))}
@@ -12,6 +12,8 @@ import { firstEntryOn } from '../data/work';
   .layer-bar { display: none; }
   @media (max-width: 899.98px) {
     .layer-bar { position: sticky; top: var(--bar); z-index: 19; height: 48px; box-sizing: border-box; display: flex; visibility: hidden; background: var(--page); border-bottom: 1px solid var(--hairline); }
+    /* Takes no room in the flow: hidden, it leaves no gap above the hero; shown, it overlays the content under the top bar. */
+    .layer-bar { margin-bottom: -48px; }
     .layer-bar[data-show] { visibility: visible; }
     .layer-bar a { flex: 1; background: var(--c); transition: opacity 300ms; }
     .layer-bar[data-lit] a:not([data-on]) { opacity: .3; }

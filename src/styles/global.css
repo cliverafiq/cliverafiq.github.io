@@ -1,6 +1,12 @@
 :root {
   /* The top bar's height. TopBar and LayerBar use it. */
   --bar: 64px;
+  /* The page column: its widest and its side padding. The top bar lines up with it. */
+  --page-max: 1240px;
+  --pad: 32px;
+}
+@media (width < 900px) {
+  :root { --pad: 20px; }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -19,14 +25,17 @@ body {
 }
 
 /* Long names, such as "SEDS Rocketry Division at ASU", wrap instead of pushing the page sideways. */
-h1, h2, h3 { overflow-wrap: anywhere; }
+h1, h2, h3 { margin: 0; line-height: 1.2; overflow-wrap: anywhere; }
+/* Text lines stay under 70 characters. */
+p { margin: 0; max-width: 70ch; }
 
 a {
   color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-a:hover { text-decoration-thickness: 2px; }
+/* Text links in the entries, Also, and Contact thicken on hover. Bars, plates, and buttons keep their own hover. */
+:is(.entry, #also, #contact) a:hover { text-decoration-thickness: 2px; }
 
 :focus-visible {
   outline: 2px solid var(--ink);
@@ -45,10 +54,10 @@ a:hover { text-decoration-thickness: 2px; }
     "also pin"
     "contact pin";
   column-gap: 56px;
-  max-width: 1240px;
+  max-width: var(--page-max);
   margin-inline: auto;
-  --pad-left: max(32px, env(safe-area-inset-left, 0px));
-  --pad-right: max(32px, env(safe-area-inset-right, 0px));
+  --pad-left: max(var(--pad), env(safe-area-inset-left, 0px));
+  --pad-right: max(var(--pad), env(safe-area-inset-right, 0px));
   padding-left: var(--pad-left);
   padding-right: var(--pad-right);
 }
@@ -81,8 +90,6 @@ a:hover { text-decoration-thickness: 2px; }
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "hero" "pin" "work" "also" "contact";
     column-gap: 0;
-    --pad-left: max(20px, env(safe-area-inset-left, 0px));
-    --pad-right: max(20px, env(safe-area-inset-right, 0px));
   }
   /* Clipped, so the tilted stack, wider than its box, cannot make the page scroll sideways.
      It runs to the screen edges, so a 320 px phone shows the whole stack. 360 px tall holds

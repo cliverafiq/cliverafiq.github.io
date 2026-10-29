@@ -26,7 +26,7 @@ test('the top bar links home, the resume, GitHub, and email', async () => {
 });
 test('the layer bar has a named segment per layer, chip to cloud', async () => {
   const doc = await renderDoc(LayerBar);
-  const segs = [...doc.querySelectorAll('nav.layer-bar[data-layer-bar][aria-label="Layers"] a[data-layer]')];
+  const segs = [...doc.querySelectorAll('nav.layer-bar[data-layer-bar][aria-label="Layer shortcuts"] a[data-layer]')];
   expect(segs.map(a => [a.textContent?.trim(), a.getAttribute('href')])).toEqual([
     ['Hardware', '#entry-drift'], ['Firmware', '#entry-drift'], ['Services', '#entry-world-salon'],
     ['Data', '#entry-world-salon'], ['Product', '#entry-physioactive'],

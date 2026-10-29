@@ -1,0 +1,15 @@
+---
+import { profile } from '../data/profile';
+---
+<nav class="topbar" aria-label="Site">
+  <a class="home" href="#top">{profile.name}</a>
+  <a href={profile.resumePath}>Resume</a>
+  <a href={profile.github}>GitHub</a>
+  <a href={`mailto:${profile.email}`}>Email</a>
+</nav>
+<style>
+  .topbar { position: sticky; top: 0; z-index: 20; height: var(--bar); box-sizing: border-box; display: flex; align-items: center; gap: 22px; padding: 0 24px; background: var(--page); border-bottom: 1px solid var(--hairline); font: 500 15px 'Geist', system-ui, sans-serif; }
+  .topbar a { color: var(--ink); text-decoration: none; }
+  .topbar a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .topbar .home { margin-right: auto; font: 800 18px 'Bricolage Grotesque', system-ui, sans-serif; letter-spacing: -0.02em; }
+</style>

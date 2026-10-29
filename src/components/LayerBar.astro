@@ -1,0 +1,20 @@
+---
+import { layers } from '../data/layers';
+import { firstEntryOn } from '../data/work';
+---
+<nav class="layer-bar" data-layer-bar aria-label="Layers">
+  {layers.map(l => (
+    <a data-layer={l.id} href={`#entry-${firstEntryOn(l.id).slug}`} style={`--c:${l.color}`}><span class="visually-hidden">{l.name}</span></a>
+  ))}
+  <span class="label" data-layer-label aria-hidden="true">All layers</span>
+</nav>
+<style>
+  .layer-bar { display: none; }
+  @media (max-width: 899.98px) {
+    .layer-bar { position: sticky; top: var(--bar); z-index: 19; height: 48px; display: flex; visibility: hidden; background: var(--page); border-bottom: 1px solid var(--hairline); }
+    .layer-bar[data-show] { visibility: visible; }
+    .layer-bar a { flex: 1; background: var(--c); transition: opacity 300ms; }
+    .layer-bar[data-lit] a:not([data-on]) { opacity: .3; }
+    .layer-bar .label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; font: 500 13px 'Geist Mono', ui-monospace, monospace; color: var(--ink); }
+  }
+</style>

@@ -159,7 +159,7 @@ Static Astro site with TypeScript and plain CSS, deployed to GitHub Pages by the
   - lighting layers and running the pulse;
   - cursor tilt, the closing at Contact, and the phone bar.
 
-  It does nothing when reduced motion is on. The pure logic (which entry is active, which layers light) lives in `src/lib/stack-state.ts` so it can be unit-tested.
+  With reduced motion on, it still lights layers but skips the pulse, tilt, and closing. The pure logic (which entry is active, which layers light) lives in `src/lib/stack-state.ts` so it can be unit-tested.
 - **Styles:**
   - `src/styles/tokens.ts` holds the new palette and layer colors.
   - `src/styles/global.css` is rewritten.

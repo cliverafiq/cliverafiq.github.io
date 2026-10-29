@@ -15,7 +15,7 @@ test('renders a 1200 × 630 PNG', async () => {
 
 test('the preview shows the name, both headline lines, and all five layers', () => {
   const svg = ogSvg();
-  for (const text of ['Clive Rafiq', 'I build backend systems,', 'and I know what runs under them.']) expect(svg).toContain(text);
+  for (const text of ['Clive Rafiq', 'I build production backend systems,', 'and I know what runs under them.']) expect(svg).toContain(text);
   for (const l of layers) expect(svg).toContain(`fill="${l.color}"`);
   expect(svg).not.toContain('Overpass');
 });

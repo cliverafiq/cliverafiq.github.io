@@ -49,6 +49,6 @@ test('also lists the three smaller pieces in order', () => {
   ]);
 });
 test('profile carries the draft headline, and no string uses a middle dot or arrow', () => {
-  expect(profile.headline).toBe('I build backend systems, and I know what runs under them.');
+  expect(profile.headline).toBe('I build production backend systems, and I know what runs under them.');
   expect(JSON.stringify({ layers, work, also, profile })).not.toMatch(/·|→/);
 });

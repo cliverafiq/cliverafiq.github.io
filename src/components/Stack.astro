@@ -18,6 +18,11 @@ const plates = layers.map((layer, i) => ({ ...layer, i })).reverse();
   <span class="trace" data-trace aria-hidden="true"></span>
 </nav>
 
+<script>
+  import { initStack } from '../scripts/stack';
+  initStack();
+</script>
+
 <style>
   .stack {
     --gap: 64px;

@@ -13,6 +13,8 @@ import { profile } from '../data/profile';
 
 <style>
   section { padding-block: 64px 96px; }
+  /* Tall enough that the reader's probe reaches Contact, so the pinned stack can close beside it. */
+  @media (min-width: 900px) { section { min-height: 60vh; } }
   h2 {
     margin: 0;
     font: 800 48px/1 'Bricolage Grotesque', system-ui, sans-serif;
